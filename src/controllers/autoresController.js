@@ -4,13 +4,11 @@ import { autores } from "../models/index.js";
 class AutorController {
   static listarAutores = async (req, res, next) => {
     try {
-      const autoresResultado = await autores.find();
+      const autoresResultado = autores.find();
 
-      if (autoresResultado !== null) {
-        res.status(200).send(autoresResultado);
-      } else {
-        next(new NaoEncontrado("Id do Autor não encontrado!"));
-      }
+      req.resultado = autoresResultado;
+
+      next();
     } catch (erro) {
       next(erro);
     }
